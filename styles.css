@@ -331,6 +331,7 @@ p { margin: 0; }
 .hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 80px; }
 
 .hero__tiles {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
@@ -376,45 +377,36 @@ p { margin: 0; }
   transition: color 0.25s var(--ease);
 }
 
-.tile--cctv  { background: #050b14 url('assets/CCTV.png')             center/cover no-repeat; }
-.tile--alarm { background: #0a0303 url('assets/alarm%20systems.png')  center/cover no-repeat; }
-.tile--access{ background: #0a0703 url('assets/access%20control.png') center/cover no-repeat; }
-.tile--cyber { background: #03110b url('assets/cybersecurity.jpg')    center/cover no-repeat; }
+.tile--cctv  { background: #050b14 url('assets/CCTV.png')             center/contain no-repeat; }
+.tile--alarm { background: #0a0303 url('assets/alarm%20systems.png')  center/contain no-repeat; }
+.tile--access{ background: #0a0703 url('assets/access%20control.png') center/contain no-repeat; }
+.tile--cyber { background: #03110b url('assets/cybersecurity.jpg')    center/contain no-repeat; }
 
 .tile-preview {
   position: absolute;
-  inset-inline: 0;
-  bottom: 0;
+  inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 0;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.25s var(--ease);
   z-index: 5;
+  background: rgba(0, 0, 0, 0.92);
 }
 .tile-preview[data-open="true"] {
   opacity: 1;
-  pointer-events: auto;
 }
 .tile-preview__img {
-  width: min(720px, 80vw);
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  border: 1px solid var(--color-gold);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   background: #000;
 }
 .tile-preview__title {
-  font-family: var(--font-display);
-  font-size: clamp(18px, 2vw, 24px);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--color-gold);
-  margin-top: 14px;
+  display: none;
 }
 .tile-preview__close {
   display: none;
@@ -438,6 +430,9 @@ p { margin: 0; }
     inset: 0;
     bottom: auto;
     background: rgba(0, 0, 0, 0.9);
+  }
+  .tile-preview[data-open="true"] {
+    pointer-events: auto;
   }
   .tile-preview__close {
     display: block;
