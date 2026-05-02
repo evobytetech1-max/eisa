@@ -118,22 +118,32 @@
       </div>
 
       <div class="hero__tiles" data-reveal>
-        <a class="tile tile--cctv" href="#solutions">
+        <a class="tile tile--cctv" href="#solutions"
+           data-preview-img="assets/CCTV.png" data-preview-title="CCTV &amp; Surveillance">
           <span class="tile__num">01</span>
           <span class="tile__label">CCTV &amp; Surveillance</span>
         </a>
-        <a class="tile tile--alarm" href="#solutions">
+        <a class="tile tile--alarm" href="#solutions"
+           data-preview-img="assets/alarm%20systems.png" data-preview-title="Alarm Systems">
           <span class="tile__num">02</span>
           <span class="tile__label">Alarm Systems</span>
         </a>
-        <a class="tile tile--access" href="#solutions">
+        <a class="tile tile--access" href="#solutions"
+           data-preview-img="assets/access%20control.png" data-preview-title="Access Control">
           <span class="tile__num">03</span>
           <span class="tile__label">Access Control</span>
         </a>
-        <a class="tile tile--cyber" href="#solutions">
+        <a class="tile tile--cyber" href="#solutions"
+           data-preview-img="assets/cybersecurity.jpg" data-preview-title="Cybersecurity">
           <span class="tile__num">04</span>
           <span class="tile__label">Cybersecurity</span>
         </a>
+      </div>
+
+      <div class="tile-preview" id="tile-preview" hidden aria-hidden="true">
+        <button class="tile-preview__close" type="button" aria-label="Close preview">&times;</button>
+        <img class="tile-preview__img" alt="" />
+        <h3 class="tile-preview__title"></h3>
       </div>
     </section>
 

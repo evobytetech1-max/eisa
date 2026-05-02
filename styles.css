@@ -376,10 +376,73 @@ p { margin: 0; }
   transition: color 0.25s var(--ease);
 }
 
-.tile--cctv  { background: radial-gradient(120% 100% at 30% 30%, #1a3a5c 0%, #050b14 70%); }
-.tile--alarm { background: radial-gradient(120% 100% at 70% 30%, #3a1414 0%, #0a0303 70%); }
-.tile--access{ background: radial-gradient(120% 100% at 30% 70%, #4a3a14 0%, #0a0703 70%); }
-.tile--cyber { background: radial-gradient(120% 100% at 70% 70%, #143a2f 0%, #03110b 70%); }
+.tile--cctv  { background: #050b14 url('assets/CCTV.png')             center/cover no-repeat; }
+.tile--alarm { background: #0a0303 url('assets/alarm%20systems.png')  center/cover no-repeat; }
+.tile--access{ background: #0a0703 url('assets/access%20control.png') center/cover no-repeat; }
+.tile--cyber { background: #03110b url('assets/cybersecurity.jpg')    center/cover no-repeat; }
+
+.tile-preview {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s var(--ease);
+  z-index: 5;
+}
+.tile-preview[data-open="true"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+.tile-preview__img {
+  width: min(720px, 80vw);
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--color-gold);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  background: #000;
+}
+.tile-preview__title {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-gold);
+  margin-top: 14px;
+}
+.tile-preview__close {
+  display: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-gold);
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--color-gold);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (hover: none) {
+  .tile-preview {
+    position: fixed;
+    inset: 0;
+    bottom: auto;
+    background: rgba(0, 0, 0, 0.9);
+  }
+  .tile-preview__close {
+    display: block;
+  }
+}
 
 /* =========================================================
    Solutions / Tabs (spec §5)

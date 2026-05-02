@@ -46,6 +46,60 @@
     });
   });
 
+  // Tile hover preview
+  const preview = document.getElementById('tile-preview');
+  const tiles = document.querySelectorAll('.tile[data-preview-img]');
+  if (preview && tiles.length) {
+    const previewImg = preview.querySelector('.tile-preview__img');
+    const previewTitle = preview.querySelector('.tile-preview__title');
+    const previewClose = preview.querySelector('.tile-preview__close');
+    let hideTimer = null;
+    const isTouch = window.matchMedia('(hover: none)').matches;
+
+    const open = (tile) => {
+      clearTimeout(hideTimer);
+      previewImg.src = tile.dataset.previewImg;
+      previewImg.alt = tile.dataset.previewTitle || '';
+      previewTitle.textContent = tile.dataset.previewTitle || '';
+      preview.hidden = false;
+      // Force reflow so the transition plays
+      void preview.offsetWidth;
+      preview.dataset.open = 'true';
+      preview.setAttribute('aria-hidden', 'false');
+    };
+    const close = () => {
+      preview.dataset.open = 'false';
+      preview.setAttribute('aria-hidden', 'true');
+      hideTimer = setTimeout(() => {
+        if (preview.dataset.open !== 'true') preview.hidden = true;
+      }, 260);
+    };
+
+    tiles.forEach((tile) => {
+      if (isTouch) {
+        tile.addEventListener('click', (e) => {
+          e.preventDefault();
+          open(tile);
+        });
+      } else {
+        tile.addEventListener('mouseenter', () => open(tile));
+        tile.addEventListener('mouseleave', close);
+        tile.addEventListener('focus', () => open(tile));
+        tile.addEventListener('blur', close);
+      }
+    });
+
+    if (isTouch) {
+      preview.addEventListener('click', (e) => {
+        if (e.target === preview || e.target === previewClose) close();
+      });
+      previewClose?.addEventListener('click', close);
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && preview.dataset.open === 'true') close();
+    });
+  }
+
   // Scroll reveal
   if (reduceMotion || !('IntersectionObserver' in window)) {
     document.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('is-visible'));
